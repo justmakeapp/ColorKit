@@ -12,19 +12,19 @@ import SwiftUI
 import AppKit.NSColor
 
 public extension Color {
-    var secondaryLabelColor: Color {
+    static var secondaryLabelColor: Color {
         return .init(nsColor: .secondaryLabelColor)
     }
     
-    var textColor: Color {
+    static var textColor: Color {
         return .init(nsColor: .textColor)
     }
     
-    var controlBackgroundColor: Color {
+    static var controlBackgroundColor: Color {
         return .init(nsColor: .controlBackgroundColor)
     }
     
-    var controlColor: Color {
+    static var controlColor: Color {
         return .init(nsColor: .controlColor)
     }
 }
