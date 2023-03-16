@@ -27,5 +27,9 @@ import Foundation
         static var controlColor: Color {
             return .init(nsColor: .controlColor)
         }
+
+        static var windowBackgroundColor: Color {
+            return .init(nsColor: .windowBackgroundColor)
+        }
     }
 #endif
