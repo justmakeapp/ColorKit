@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SystemColor+macOS.swift
 //
 //
 //  Created by Long Vu on 15/03/2023.

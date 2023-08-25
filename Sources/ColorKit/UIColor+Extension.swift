@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  UIColor+Extension.swift
 //
 //
 //  Created by Long Vu on 14/05/2022.
