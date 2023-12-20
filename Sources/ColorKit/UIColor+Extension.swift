@@ -6,9 +6,27 @@
 //
 
 import Foundation
+import SwiftUI
 
 #if os(iOS)
     import UIKit
+
+    public extension Color {
+        init?(hexRGB: String) {
+            guard let uiColor = UIColor(hexRGB: hexRGB) else {
+                return nil
+            }
+            self = Color(uiColor)
+        }
+
+        init?(hexRGBA: String) {
+            guard let uiColor = UIColor(hexRGBA: hexRGBA) else {
+                return nil
+            }
+            self = Color(uiColor)
+        }
+    }
+
     public extension UIColor {
         convenience init?(hexRGBA: String) {
             guard let val = Int(hexRGBA.replacingOccurrences(of: "#", with: ""), radix: 16) else {
