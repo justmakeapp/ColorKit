@@ -11,6 +11,29 @@ import SwiftUI
 #if os(iOS)
     import UIKit
 
+    extension UIColor {
+        convenience init(light: UIColor?, dark: UIColor?) {
+            self.init {
+                switch $0.userInterfaceStyle {
+                case .dark:
+                    return dark ?? .clear
+
+                case .light, .unspecified:
+                    return light ?? .clear
+
+                @unknown default:
+                    return light ?? .clear
+                }
+            }
+        }
+    }
+
+    extension Color {
+        init(light: UIColor?, dark: UIColor?) {
+            self = Color(UIColor(light: light, dark: dark))
+        }
+    }
+
     public extension Color {
         init?(hexRGB: String) {
             guard let uiColor = UIColor(hexRGB: hexRGB) else {
