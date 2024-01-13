@@ -28,6 +28,33 @@ public struct UtilityColor {
         v.shade700 = Color(light: .init(hexRGB: "#BC1B06"), dark: .init(hexRGB: "#FF9C66"))
         return v
     }()
+
+    public let success: ShadeVariationColor = {
+        var v = ShadeVariationColor()
+        v.shade50 = Color(light: .init(hexRGB: "#ECFDF3"), dark: .init(hexRGB: "#053321"))
+        v.shade200 = Color(light: .init(hexRGB: "#ABEFC6"), dark: .init(hexRGB: "#085D3A"))
+        v.shade500 = Color(light: .init(hexRGB: "#17B26A"), dark: .init(hexRGB: "#17B26A"))
+        v.shade700 = Color(light: .init(hexRGB: "#067647"), dark: .init(hexRGB: "#75E0A7"))
+        return v
+    }()
+
+    public let error: ShadeVariationColor = {
+        var v = ShadeVariationColor()
+        v.shade50 = Color(light: .init(hexRGB: "#FEF3F2"), dark: .init(hexRGB: "#55160C"))
+        v.shade200 = Color(light: .init(hexRGB: "#FECDCA"), dark: .init(hexRGB: "#912018"))
+        v.shade500 = Color(light: .init(hexRGB: "#F04438"), dark: .init(hexRGB: "#F04438"))
+        v.shade700 = Color(light: .init(hexRGB: "#B42318"), dark: .init(hexRGB: "#FDA29B"))
+        return v
+    }()
+
+    public let warning: ShadeVariationColor = {
+        var v = ShadeVariationColor()
+        v.shade50 = Color(light: .init(hexRGB: "#FFFAEB"), dark: .init(hexRGB: "#4E1D09"))
+        v.shade200 = Color(light: .init(hexRGB: "#FEDF89"), dark: .init(hexRGB: "#93370D"))
+        v.shade500 = Color(light: .init(hexRGB: "#F79009"), dark: .init(hexRGB: "#F79009"))
+        v.shade700 = Color(light: .init(hexRGB: "#B54708"), dark: .init(hexRGB: "#FEC84B"))
+        return v
+    }()
 }
 
 public extension UIColor {
