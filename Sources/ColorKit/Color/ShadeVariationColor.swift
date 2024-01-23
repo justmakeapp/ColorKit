@@ -55,6 +55,15 @@ public struct UtilityColor {
         v.shade700 = Color(light: .init(hexRGB: "#B54708"), dark: .init(hexRGB: "#FEC84B"))
         return v
     }()
+
+    public let blueLight: ShadeVariationColor = {
+        var v = ShadeVariationColor()
+        v.shade50 = Color(light: .init(hexRGB: "#F0F9FF"), dark: .init(hexRGB: "#062C41"))
+        v.shade200 = Color(light: .init(hexRGB: "#B9E6FE"), dark: .init(hexRGB: "#065986"))
+        v.shade500 = Color(light: .init(hexRGB: "#0BA5EC"), dark: .init(hexRGB: "#0BA5EC"))
+        v.shade700 = Color(light: .init(hexRGB: "#026AA2"), dark: .init(hexRGB: "#7CD4FD"))
+        return v
+    }()
 }
 
 public extension UIColor {
