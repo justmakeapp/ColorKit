@@ -10,6 +10,18 @@ import SwiftUI
 #if os(iOS)
     import UIKit.UIColor
 
+    public typealias PlatformColor = UIColor
+#endif
+
+#if os(macOS)
+    import AppKit.NSColor
+
+    public typealias PlatformColor = NSColor
+#endif
+
+#if os(iOS)
+    import UIKit.UIColor
+
     public extension Color {
         var hexString: String? {
             return UIColor(self).hexString
@@ -29,4 +41,27 @@ import SwiftUI
             return Color(uiColor)
         }
     }
+
+    extension Color {
+        init(light: PlatformColor?, dark: PlatformColor?) {
+            self = Color(UIColor(light: light, dark: dark))
+        }
+    }
+
 #endif
+
+public extension Color {
+    init?(hexRGB: String) {
+        guard let pColor = PlatformColor(hexRGB: hexRGB) else {
+            return nil
+        }
+        self = Color(pColor)
+    }
+
+    init?(hexRGBA: String) {
+        guard let pColor = PlatformColor(hexRGBA: hexRGBA) else {
+            return nil
+        }
+        self = Color(pColor)
+    }
+}

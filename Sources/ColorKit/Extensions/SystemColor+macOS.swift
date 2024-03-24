@@ -31,5 +31,12 @@ import Foundation
         static var windowBackgroundColor: Color {
             return .init(nsColor: .windowBackgroundColor)
         }
+
+        static let systemGray = Color(NSColor.systemGray)
+        static let systemGray2 = Color("AppleGray2", bundle: .module)
+        static let systemGray3 = Color("AppleGray3", bundle: .module)
+        static let systemGray4 = Color("AppleGray4", bundle: .module)
+        static let systemGray5 = Color("AppleGray5", bundle: .module)
+        static let systemGray6 = Color("AppleGray6", bundle: .module)
     }
 #endif
