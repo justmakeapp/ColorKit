@@ -38,5 +38,9 @@ import Foundation
         static let systemGray4 = Color("AppleGray4", bundle: .module)
         static let systemGray5 = Color("AppleGray5", bundle: .module)
         static let systemGray6 = Color("AppleGray6", bundle: .module)
+
+        // MARK: - Other Colors
+
+        static let separator = Color(NSColor.separatorColor)
     }
 #endif
