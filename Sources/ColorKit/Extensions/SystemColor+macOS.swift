@@ -28,6 +28,10 @@ import Foundation
             return .init(nsColor: .controlColor)
         }
 
+        static var systemBackground: Color {
+            windowBackgroundColor
+        }
+
         static var windowBackgroundColor: Color {
             return .init(nsColor: .windowBackgroundColor)
         }
