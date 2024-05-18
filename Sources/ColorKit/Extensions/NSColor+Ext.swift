@@ -5,7 +5,7 @@
 //  Created by Long Vu on 24/3/24.
 //
 
-#if canImport(AppKit)
+#if canImport(AppKit) && os(macOS)
     import AppKit.NSColor
     import Foundation
 
