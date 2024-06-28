@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ShadeVariationColor {
+public struct ShadeVariationColor: Sendable {
     public var shade50: Color = .clear
     public var shade100: Color = .clear
     public var shade200: Color = .clear
@@ -19,7 +19,7 @@ public struct ShadeVariationColor {
 
 // FIXME: - Make it work with macOS
 #if os(iOS)
-    public struct UtilityColor {
+    public struct UtilityColor: Sendable {
         public init() {}
 
         public let orange: ShadeVariationColor = {
