@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NSColor+Ext.swift
 //
 //
 //  Created by Long Vu on 24/3/24.

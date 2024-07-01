@@ -23,8 +23,8 @@ import SwiftUI
     import UIKit.UIColor
 
     public extension Color {
-        var hexString: String? {
-            return UIColor(self).hexString
+        func toHexString(includeAlpha: Bool = false) -> String? {
+            return UIColor(self).toHexString(includeAlpha: includeAlpha)
         }
 
         func lighter(by percentage: CGFloat = 30.0) -> Color? {
@@ -63,5 +63,15 @@ public extension Color {
             return nil
         }
         self = Color(pColor)
+    }
+}
+
+public extension Color {
+    static func random() -> Color {
+        return Color(
+            red: Double.random(in: 0 ... 1),
+            green: Double.random(in: 0 ... 1),
+            blue: Double.random(in: 0 ... 1)
+        )
     }
 }

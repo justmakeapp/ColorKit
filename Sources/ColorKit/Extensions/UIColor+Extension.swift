@@ -46,15 +46,29 @@ import SwiftUI
     }
 
     public extension UIColor {
-        var hexString: String? {
-            guard let components = cgColor.components, components.count >= 3 else {
+        func toHexString(includeAlpha: Bool = false) -> String? {
+            // Get the red, green, and blue components of the UIColor as floats between 0 and 1
+            guard let components = cgColor.components else {
+                // If the UIColor's color space doesn't support RGB components, return nil
                 return nil
             }
 
-            let r = Float(components[0])
-            let g = Float(components[1])
-            let b = Float(components[2])
-            return "#" + String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
+            // Convert the red, green, and blue components to integers between 0 and 255
+            let red = Int(components[0] * 255.0)
+            let green = Int(components[1] * 255.0)
+            let blue = Int(components[2] * 255.0)
+
+            // Create a hex string with the RGB values and, optionally, the alpha value
+            let hexString: String
+            if includeAlpha, let alpha = components.last {
+                let alphaValue = Int(alpha * 255.0)
+                hexString = String(format: "#%02X%02X%02X%02X", red, green, blue, alphaValue)
+            } else {
+                hexString = String(format: "#%02X%02X%02X", red, green, blue)
+            }
+
+            // Return the hex string
+            return hexString
         }
     }
 

@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "ColorKit",
             dependencies: []
-        )
+        ),
     ],
     swiftLanguageVersions: [.v6]
 )
