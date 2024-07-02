@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-#if os(iOS)
+#if canImport(UIKit)
     import UIKit.UIColor
 
     public typealias PlatformColor = UIColor
