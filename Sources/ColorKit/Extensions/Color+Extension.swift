@@ -26,27 +26,29 @@ import SwiftUI
         func toHexString(includeAlpha: Bool = false) -> String? {
             return UIColor(self).toHexString(includeAlpha: includeAlpha)
         }
-
-        func lighter(by percentage: CGFloat = 30.0) -> Color? {
-            guard let uiColor = UIColor(self).lighter(by: percentage) else {
-                return nil
-            }
-            return Color(uiColor)
-        }
-
-        func darker(by percentage: CGFloat = 30.0) -> Color? {
-            guard let uiColor = UIColor(self).darker(by: percentage) else {
-                return nil
-            }
-            return Color(uiColor)
-        }
     }
 
-    extension Color {
-        init(light: PlatformColor?, dark: PlatformColor?) {
-            self = Color(UIColor(light: light, dark: dark))
+    #if os(iOS) || os(visionOS)
+        extension Color {
+            init(light: PlatformColor?, dark: PlatformColor?) {
+                self = Color(UIColor(light: light, dark: dark))
+            }
+
+            func lighter(by percentage: CGFloat = 30.0) -> Color? {
+                guard let uiColor = UIColor(self).lighter(by: percentage) else {
+                    return nil
+                }
+                return Color(uiColor)
+            }
+
+            func darker(by percentage: CGFloat = 30.0) -> Color? {
+                guard let uiColor = UIColor(self).darker(by: percentage) else {
+                    return nil
+                }
+                return Color(uiColor)
+            }
         }
-    }
+    #endif
 
 #endif
 
