@@ -43,7 +43,7 @@
             self.init(red: components.R, green: components.G, blue: components.B, alpha: components.a)
         }
 
-        func toHex(alpha: Bool = false) -> String? {
+        func toHexString(includeAlpha: Bool = false) -> String? {
             guard let components = cgColor.components, components.count >= 3 else {
                 return nil
             }
@@ -57,7 +57,7 @@
                 a = Float(components[3])
             }
 
-            if alpha {
+            if includeAlpha {
                 return String(
                     format: "%02lX%02lX%02lX%02lX",
                     lroundf(r * 255),
