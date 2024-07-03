@@ -15,13 +15,14 @@ let package = Package(
             name: "ColorKit",
             targets: ["ColorKit"]
         ),
-    ],
-    dependencies: [],
-    targets: [
-        .target(
-            name: "ColorKit",
-            dependencies: []
+        .library(
+            name: "ColorKitUI",
+            targets: ["ColorKitUI"]
         ),
+    ],
+    targets: [
+        .target(name: "ColorKit"),
+        .target(name: "ColorKitUI", dependencies: ["ColorKit"]),
     ],
     swiftLanguageVersions: [.v6]
 )
