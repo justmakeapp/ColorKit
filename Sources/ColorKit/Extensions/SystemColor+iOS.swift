@@ -1,6 +1,6 @@
 // Created 04/02/2022
 
-#if os(iOS)
+#if os(iOS) || os(visionOS) || os(tvOS)
     import SwiftUI
     import UIKit
 

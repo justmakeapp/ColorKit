@@ -29,8 +29,12 @@ struct InternalColorCell: View {
         }
         .buttonStyle(.plain)
         .modify {
-            if #available(iOS 17.0, *) {
-                $0.sensoryFeedback(.selection, trigger: counter)
+            if #available(iOS 17.0, macOS 14.0, *) {
+                #if os(macOS) || os(iOS)
+                    $0.sensoryFeedback(.selection, trigger: counter)
+                #else
+                    $0
+                #endif
             } else {
                 $0
             }
@@ -54,7 +58,9 @@ struct InternalColorCell: View {
                     if isSelected {
                         Image(systemName: "checkmark")
                             .font(.subheadline.weight(.semibold))
+                        #if !os(watchOS)
                             .foregroundColor(Color.systemBackground)
+                        #endif
                     }
                 }
                 .padding()
