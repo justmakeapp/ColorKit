@@ -16,6 +16,8 @@ struct InternalColorCell: View {
 
     @State private var counter = 0
 
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         Button {
             action()
@@ -58,9 +60,20 @@ struct InternalColorCell: View {
                     if isSelected {
                         Image(systemName: "checkmark")
                             .font(.subheadline.weight(.semibold))
-                        #if !os(watchOS)
-                            .foregroundColor(Color.systemBackground)
-                        #endif
+                            .foregroundColor({
+                                switch colorScheme {
+                                case .light:
+                                    return .white
+                                case .dark:
+                                    #if os(visionOS)
+                                        return .white
+                                    #else
+                                        return .black
+                                    #endif
+                                @unknown default:
+                                    return .white
+                                }
+                            }())
                     }
                 }
                 .padding()
@@ -143,6 +156,12 @@ public struct ColorProviderCell: View {
     return HStack {
         ColorCell(
             selection: .constant(Color.blue),
+            color: Color.green,
+            size: size
+        )
+
+        ColorCell(
+            selection: .constant(Color.green),
             color: Color.green,
             size: size
         )
