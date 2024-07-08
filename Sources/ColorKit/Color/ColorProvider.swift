@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public enum ColorProvider: RawRepresentable, Hashable, Codable {
+public enum ColorProvider: RawRepresentable, Hashable, Codable, Sendable {
     enum Prefix: String {
         case hexRGB
         case hexRGBA
@@ -16,7 +16,7 @@ public enum ColorProvider: RawRepresentable, Hashable, Codable {
         case appleColor
     }
 
-    public enum AppleColor: String, CaseIterable {
+    public enum AppleColor: String, CaseIterable, Sendable {
         case systemRed
         case systemOrange
         case systemYellow
