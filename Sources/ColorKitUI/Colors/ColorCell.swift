@@ -101,7 +101,7 @@ public struct ColorCell: View {
     }
 
     private var isSelected: Bool {
-        return selection == color
+        return selection?.toHexString() == color.toHexString() || selection == color
     }
 
     private var contentView: some View {
