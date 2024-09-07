@@ -50,7 +50,7 @@ import SwiftUI
     public extension UIColor {
         func toHexString(includeAlpha: Bool = false) -> String? {
             // Get the red, green, and blue components of the UIColor as floats between 0 and 1
-            guard let components = cgColor.components else {
+            guard let components = cgColor.components, components.count > 2 else {
                 // If the UIColor's color space doesn't support RGB components, return nil
                 return nil
             }
