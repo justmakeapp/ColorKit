@@ -36,6 +36,10 @@ import Foundation
             return .init(nsColor: .windowBackgroundColor)
         }
 
+        static var unemphasizedSelectedContentBackgroundColor: Color {
+            return .init(nsColor: .unemphasizedSelectedContentBackgroundColor)
+        }
+
         static let systemGray = Color(NSColor.systemGray)
         static let systemGray2 = Color("AppleGray2", bundle: .module)
         static let systemGray3 = Color("AppleGray3", bundle: .module)
