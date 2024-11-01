@@ -28,9 +28,21 @@ import Foundation
             return .init(nsColor: .controlColor)
         }
 
+        // MARK: - Background Colors
+
+        static let systemBackgroundAsIOS = Color("PrimarySystemBackground", bundle: .module)
+        static let secondarySystemBackgroundAsIOS = Color("SecondarySystemBackground", bundle: .module)
+        static let tertiarySystemBackgroundAsIOS = Color("TertiarySystemBackground", bundle: .module)
+
         static var systemBackground: Color {
             windowBackgroundColor
         }
+
+        // MARK: - Grouped Background Colors
+
+        static let systemGroupedBackground = Color("PrimarySystemGroupedBackground", bundle: .module)
+        static let secondarySystemGroupedBackground = Color("SecondarySystemGroupedBackground", bundle: .module)
+        static let tertiarySystemGroupedBackground = Color("TertiarySystemGroupedBackground", bundle: .module)
 
         static var windowBackgroundColor: Color {
             return .init(nsColor: .windowBackgroundColor)
