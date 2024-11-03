@@ -52,6 +52,65 @@ import Foundation
             return .init(nsColor: .unemphasizedSelectedContentBackgroundColor)
         }
 
+        // MARK: - Fill Colors
+
+        static var systemFill: Color {
+            if #available(macOS 14.0, *) {
+                return .init(nsColor: .systemFill)
+            } else {
+                return Color(
+                    light: Color(hexRGBA: "#0000001A")!,
+                    dark: Color(hexRGBA: "#FFFFFF1A")!
+                )
+            }
+        }
+
+        static var secondarySystemFill: Color {
+            if #available(macOS 14.0, *) {
+                return .init(nsColor: .secondarySystemFill)
+            } else {
+                return Color(
+                    light: Color(hexRGBA: "#00000014")!,
+                    dark: Color(hexRGBA: "#FFFFFF14")!
+                )
+            }
+        }
+
+        static var tertiarySystemFill: Color {
+            if #available(macOS 14.0, *) {
+                return .init(nsColor: .tertiarySystemFill)
+            } else {
+                return Color(
+                    light: Color(hexRGBA: "#0000000D")!,
+                    dark: Color(hexRGBA: "#FFFFFF0D")!
+                )
+            }
+        }
+
+        static var quaternarySystemFill: Color {
+            if #available(macOS 14.0, *) {
+                return .init(nsColor: .quaternarySystemFill)
+            } else {
+                return Color(
+                    light: Color(hexRGBA: "#00000008")!,
+                    dark: Color(hexRGBA: "#FFFFFF08")!
+                )
+            }
+        }
+
+        static var quinarySystemFill: Color {
+            if #available(macOS 14.0, *) {
+                return .init(nsColor: .quinarySystemFill)
+            } else {
+                return Color(
+                    light: Color(hexRGBA: "#00000004")!,
+                    dark: Color(hexRGBA: "#FFFFFF04")!
+                )
+            }
+        }
+
+        // MARK: - System Gray Colors
+
         static let systemGray = Color(NSColor.systemGray)
         static let systemGray2 = Color("AppleGray2", bundle: .module)
         static let systemGray3 = Color("AppleGray3", bundle: .module)
