@@ -90,7 +90,7 @@ public extension Color {
         }
     #endif
 
-    #if canImport(AppKit)
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
         init(light: NSColor, dark: NSColor) {
             self.init(nsColor: NSColor(name: nil, dynamicProvider: { appearance in
                 switch appearance.name {
