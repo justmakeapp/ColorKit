@@ -38,6 +38,10 @@ import Foundation
             windowBackgroundColor
         }
 
+        static var secondarySystemBackground: Color {
+            controlBackgroundColor
+        }
+
         // MARK: - Grouped Background Colors
 
         static let systemGroupedBackground = Color("PrimarySystemGroupedBackground", bundle: .module)
