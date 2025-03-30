@@ -28,11 +28,25 @@ import Foundation
             return .init(nsColor: .controlColor)
         }
 
+        // MARK: - Label Colors
+
+//        static let label = Color(UIColor.label)
+//        static let secondaryLabel = Color(UIColor.secondaryLabel)
+        static let tertiaryLabel = Color(
+            light: Color(hexRGB: "3C3C43")!.opacity(0.3),
+            dark: Color(hexRGB: "EBEBF5")!.opacity(0.3)
+        )
+
+        static let quaternaryLabel = Color(
+            light: Color(hexRGB: "3C3C43")!.opacity(0.18),
+            dark: Color(hexRGB: "EBEBF5")!.opacity(0.16)
+        )
+
         // MARK: - Background Colors
 
         static let systemBackgroundAsIOS = Color("PrimarySystemBackground", bundle: .module)
         static let secondarySystemBackgroundAsIOS = Color("SecondarySystemBackground", bundle: .module)
-        static let tertiarySystemBackgroundAsIOS = Color("TertiarySystemBackground", bundle: .module)
+        static let tertiarySystemBackground = Color("TertiarySystemBackground", bundle: .module)
 
         static var systemBackground: Color {
             windowBackgroundColor
