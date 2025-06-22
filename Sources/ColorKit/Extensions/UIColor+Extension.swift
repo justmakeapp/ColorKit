@@ -49,28 +49,40 @@ import SwiftUI
 
     public extension UIColor {
         func toHexString(includeAlpha: Bool = false) -> String? {
-            // Get the red, green, and blue components of the UIColor as floats between 0 and 1
-            guard let components = cgColor.components, components.count > 2 else {
-                // If the UIColor's color space doesn't support RGB components, return nil
-                return nil
+            var red: CGFloat = 0
+            var green: CGFloat = 0
+            var blue: CGFloat = 0
+            var alpha: CGFloat = 0
+
+            guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+                assertionFailure("Failed to get RGBA components from UIColor")
+                return "#000000"
             }
 
-            // Convert the red, green, and blue components to integers between 0 and 255
-            let red = Int(components[0] * 255.0)
-            let green = Int(components[1] * 255.0)
-            let blue = Int(components[2] * 255.0)
+            // Clamp components to [0.0, 1.0]
+            red = max(0, min(1, red))
+            green = max(0, min(1, green))
+            blue = max(0, min(1, blue))
+            alpha = max(0, min(1, alpha))
 
-            // Create a hex string with the RGB values and, optionally, the alpha value
-            let hexString: String
-            if includeAlpha, let alpha = components.last {
-                let alphaValue = Int(alpha * 255.0)
-                hexString = String(format: "#%02X%02X%02X%02X", red, green, blue, alphaValue)
+            if !includeAlpha {
+                // RGB
+                return String(
+                    format: "#%02lX%02lX%02lX",
+                    Int(round(red * 255)),
+                    Int(round(green * 255)),
+                    Int(round(blue * 255))
+                )
             } else {
-                hexString = String(format: "#%02X%02X%02X", red, green, blue)
+                // RGBA
+                return String(
+                    format: "#%02lX%02lX%02lX%02lX",
+                    Int(round(red * 255)),
+                    Int(round(green * 255)),
+                    Int(round(blue * 255)),
+                    Int(round(alpha * 255))
+                )
             }
-
-            // Return the hex string
-            return hexString
         }
     }
 
