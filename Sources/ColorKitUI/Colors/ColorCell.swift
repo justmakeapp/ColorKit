@@ -28,6 +28,13 @@ struct InternalColorCell: View {
                 outerCircle
                 innerCircle
             }
+            .modify {
+                if #available(iOS 26.0, macOS 26.0, *) {
+                    $0.glassEffect()
+                } else {
+                    $0
+                }
+            }
         }
         .buttonStyle(.plain)
         .modify {
