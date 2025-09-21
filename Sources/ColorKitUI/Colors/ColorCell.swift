@@ -29,7 +29,7 @@ struct InternalColorCell: View {
                 innerCircle
             }
             .modify {
-                if #available(iOS 26.0, macOS 26.0, *) {
+                if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
                     $0.glassEffect()
                 } else {
                     $0
