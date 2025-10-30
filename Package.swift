@@ -21,8 +21,15 @@ let package = Package(
         ),
     ],
     targets: [
-        .target(name: "ColorKit"),
-        .target(name: "ColorKitUI", dependencies: ["ColorKit"]),
-    ],
-    swiftLanguageModes: [.v6]
+        .target(
+            name: "ColorKit",
+            resources: [
+                .process("Resources")
+            ]
+        ),
+        .target(
+            name: "ColorKitUI",
+            dependencies: ["ColorKit"]
+        ),
+    ]
 )
