@@ -24,6 +24,14 @@ import Foundation
             return .init(nsColor: .controlBackgroundColor)
         }
 
+        static var gridColor: Color {
+            return .init(nsColor: .gridColor)
+        }
+
+        static var unemphasizedSelectedTextBackgroundColor: Color {
+            return .init(nsColor: .unemphasizedSelectedTextBackgroundColor)
+        }
+
         static var controlColor: Color {
             return .init(nsColor: .controlColor)
         }
