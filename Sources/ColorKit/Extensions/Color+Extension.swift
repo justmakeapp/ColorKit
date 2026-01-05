@@ -26,6 +26,21 @@ public extension Color {
 }
 
 public extension Color {
+    /// Creates a Color from a hexadecimal color string.
+    ///
+    /// Supports both RGB (6 characters) and RGBA (8 characters) formats.
+    /// The hex string can optionally start with a '#' character.
+    ///
+    /// - Parameter hex: A hexadecimal color string. Examples: "#RRGGBB", "RRGGBB", "#RRGGBBAA", "RRGGBBAA"
+    ///
+    /// - Note: For 6-character hex strings, alpha defaults to 1.0 (fully opaque).
+    ///         For 8-character hex strings, the last two characters represent alpha.
+    ///         Invalid hex strings will result in black color (000000).
+    init(hex: String) {
+        let pColor = PlatformColor(hex: hex)
+        self = Color(pColor)
+    }
+
     init?(hexRGB: String) {
         guard let pColor = PlatformColor(hexRGB: hexRGB) else {
             return nil
