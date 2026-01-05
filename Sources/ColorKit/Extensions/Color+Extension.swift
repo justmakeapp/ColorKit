@@ -130,6 +130,22 @@ public extension Color {
     #endif
 }
 
+// MARK: - Codable Color
+
+extension Color: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let hex = try container.decode(String.self)
+
+        self.init(hex: hex)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(toHexString(includeAlpha: true))
+    }
+}
+
 // MARK: - Color Spaces
 
 public extension Color {
