@@ -91,15 +91,18 @@ struct InternalColorCell: View {
 public struct ColorCell: View {
     @Binding var selection: Color?
     let color: Color
+    let displayColor: Color
     var size: CGSize
 
     public init(
         selection: Binding<Color?>,
         color: Color,
+        displayColor: Color? = nil,
         size: CGSize
     ) {
         _selection = selection
         self.color = color
+        self.displayColor = displayColor ?? color
         self.size = size
     }
 
@@ -112,7 +115,7 @@ public struct ColorCell: View {
     }
 
     private var contentView: some View {
-        InternalColorCell(color: color, size: size, isSelected: isSelected) {
+        InternalColorCell(color: displayColor, size: size, isSelected: isSelected) {
             if selection != color {
                 selection = color
             }
