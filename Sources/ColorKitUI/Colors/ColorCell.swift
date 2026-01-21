@@ -52,7 +52,7 @@ struct InternalColorCell: View {
 
     private var outerCircle: some View {
         Circle()
-            .strokeBorder(color, lineWidth: 2)
+            .strokeBorder(color.gradient, lineWidth: 2)
             .frame(width: size.width, height: size.height)
     }
 
@@ -60,7 +60,7 @@ struct InternalColorCell: View {
     private var innerCircle: some View {
         let paddingValue: CGFloat = 8
         Circle()
-            .fill(color)
+            .fill(color.gradient)
             .frame(width: size.width - paddingValue, height: size.width - paddingValue)
             .overlay(
                 ZStack {
@@ -161,19 +161,21 @@ public struct ColorProviderCell: View {
     }
 }
 
-#Preview {
-    let size = CGSize(width: 40, height: 40)
-    return HStack {
-        ColorCell(
-            selection: .constant(Color.blue),
-            color: Color.green,
-            size: size
-        )
+#if DEBUG
+    #Preview {
+        let size = CGSize(width: 40, height: 40)
+        return HStack {
+            ColorCell(
+                selection: .constant(Color.blue),
+                color: Color.green,
+                size: size
+            )
 
-        ColorCell(
-            selection: .constant(Color.green),
-            color: Color.green,
-            size: size
-        )
+            ColorCell(
+                selection: .constant(Color.green),
+                color: Color.green,
+                size: size
+            )
+        }
     }
-}
+#endif
