@@ -25,18 +25,6 @@ struct RGBColor {
     let b: Double // 0..1
     let alpha: Double // 0..1
 
-    init(
-        r: Double,
-        g: Double,
-        b: Double,
-        alpha: Double
-    ) {
-        self.r = r
-        self.g = g
-        self.b = b
-        self.alpha = alpha
-    }
-
     fileprivate func sRGBCompand(_ v: Double) -> Double {
         let absV = abs(v)
         let out = absV > 0.040_45 ? pow((absV + 0.055) / 1.055, 2.4) : absV / 12.92
@@ -85,18 +73,6 @@ struct XYZColor {
     let y: Double // 0..1
     let z: Double // 0..1.08883
     let alpha: Double // 0..1
-
-    init(
-        x: Double,
-        y: Double,
-        z: Double,
-        alpha: Double
-    ) {
-        self.x = x
-        self.y = y
-        self.z = z
-        self.alpha = alpha
-    }
 
     fileprivate func sRGBCompand(_ v: Double) -> Double {
         let absV = abs(v)
@@ -152,18 +128,6 @@ struct LABColor {
     let b: Double // -128..128
     let alpha: Double //    0..1
 
-    init(
-        l: Double,
-        a: Double,
-        b: Double,
-        alpha: Double
-    ) {
-        self.l = l
-        self.a = a
-        self.b = b
-        self.alpha = alpha
-    }
-
     fileprivate func xyzCompand(_ v: Double) -> Double {
         let v3 = v * v * v
         return v3 > LAB_E ? v3 : (v - LAB_16_116) / LAB_K_116
@@ -209,18 +173,6 @@ struct LCHColor {
     let c: Double // 0..128
     let h: Double // 0..360
     let alpha: Double // 0..1
-
-    init(
-        l: Double,
-        c: Double,
-        h: Double,
-        alpha: Double
-    ) {
-        self.l = l
-        self.c = c
-        self.h = h
-        self.alpha = alpha
-    }
 
     func toLAB() -> LABColor {
         let rad = h / RAD_TO_DEG

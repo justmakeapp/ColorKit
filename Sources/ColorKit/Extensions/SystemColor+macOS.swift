@@ -38,8 +38,6 @@ import Foundation
 
         // MARK: - Label Colors
 
-//        static let label = Color(UIColor.label)
-//        static let secondaryLabel = Color(UIColor.secondaryLabel)
         static let tertiaryLabel = Color(
             light: Color(hexRGB: "3C3C43")!.opacity(0.3),
             dark: Color(hexRGB: "EBEBF5")!.opacity(0.3)
