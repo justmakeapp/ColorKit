@@ -31,5 +31,6 @@ let package = Package(
             name: "ColorKitUI",
             dependencies: ["ColorKit"]
         ),
-    ]
+    ],
+    swiftLanguageModes: [.v6]
 )
