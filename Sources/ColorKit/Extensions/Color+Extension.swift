@@ -132,7 +132,7 @@ public extension Color {
 
 // MARK: - Codable Color
 
-extension Color: Codable {
+extension Color: @retroactive Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let hex = try container.decode(String.self)
