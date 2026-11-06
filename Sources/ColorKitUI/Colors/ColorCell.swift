@@ -16,8 +16,6 @@ struct InternalColorCell: View {
 
     @State private var counter = 0
 
-    @Environment(\.colorScheme) private var colorScheme
-
     var body: some View {
         Button {
             action()
@@ -26,15 +24,10 @@ struct InternalColorCell: View {
         } label: {
             ZStack {
                 outerCircle
+                    .opacity(isSelected ? 0 : 1)
                 innerCircle
             }
-            .modify {
-                if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
-                    $0.glassEffect(.clear)
-                } else {
-                    $0
-                }
-            }
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         }
         .buttonStyle(.plain)
         .modify {
@@ -58,32 +51,29 @@ struct InternalColorCell: View {
 
     @ViewBuilder
     private var innerCircle: some View {
-        let paddingValue: CGFloat = 8
+        // The selected cell drops the outer ring and fills its whole size; its white circle takes the size the
+        // inner circle has when not selected.
+        let unselectedSize = size.width - 8
+        let innerSize = isSelected ? size.width : unselectedSize
         Circle()
             .fill(color.gradient)
-            .frame(width: size.width - paddingValue, height: size.width - paddingValue)
+            .frame(width: innerSize, height: innerSize)
             .overlay(
                 ZStack {
                     if isSelected {
-                        Image(systemName: "checkmark")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundColor({
-                                switch colorScheme {
-                                case .light:
-                                    return .white
-                                case .dark:
-                                    #if os(visionOS)
-                                        return .white
-                                    #else
-                                        return .black
-                                    #endif
-                                @unknown default:
-                                    return .white
+                        Circle()
+                            .fill(.white.opacity(0.6))
+                            .frame(width: unselectedSize, height: unselectedSize)
+                            .modify {
+                                if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
+                                    $0.glassEffect(.clear, in: Circle())
+                                } else {
+                                    $0
                                 }
-                            }())
+                            }
+                            .transition(.scale.combined(with: .opacity))
                     }
                 }
-                .padding()
             )
     }
 }
@@ -162,20 +152,20 @@ public struct ColorProviderCell: View {
 }
 
 #if DEBUG
-    #Preview {
-        let size = CGSize(width: 40, height: 40)
-        return HStack {
-            ColorCell(
-                selection: .constant(Color.blue),
-                color: Color.green,
-                size: size
-            )
+    /// Tap a cell to watch the selection animate.
+    private struct ColorCellPreview: View {
+        @State private var selection: Color? = .green
 
-            ColorCell(
-                selection: .constant(Color.green),
-                color: Color.green,
-                size: size
-            )
+        var body: some View {
+            HStack {
+                ForEach([Color.blue, .green, .orange], id: \.self) { color in
+                    ColorCell(selection: $selection, color: color, size: CGSize(width: 40, height: 40))
+                }
+            }
         }
+    }
+
+    #Preview {
+        ColorCellPreview()
     }
 #endif
