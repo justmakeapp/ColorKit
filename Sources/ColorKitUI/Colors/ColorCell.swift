@@ -15,6 +15,7 @@ struct InternalColorCell: View {
     let action: () -> Void
 
     @State private var counter = 0
+    @Environment(\.self) private var environment
 
     var body: some View {
         Button {
@@ -57,8 +58,8 @@ struct InternalColorCell: View {
     }
 
     private var innerCircle: some View {
-        // The selected cell drops the outer ring and fills its whole size; its white circle takes the size the
-        // inner circle has when not selected.
+        // The selected cell drops the outer ring and fills its whole size; its dot takes the size the inner circle
+        // has when not selected.
         let unselectedSize = diameter - 8
         let innerSize = isSelected ? diameter : unselectedSize
         return Circle()
@@ -67,9 +68,7 @@ struct InternalColorCell: View {
             .overlay {
                 if isSelected {
                     Circle()
-                        .fill(.white.opacity(0.6))
-                        // The hairline keeps the white dot visible on white, yellow and other light swatches.
-                        .overlay(Circle().strokeBorder(.black.opacity(0.15), lineWidth: 1))
+                        .fill(dotColor)
                         .frame(width: unselectedSize, height: unselectedSize)
                         .modify {
                             if #available(iOS 26.0, macOS 26.0, watchOS 26.0, *) {
@@ -81,6 +80,21 @@ struct InternalColorCell: View {
                         .transition(.scale.combined(with: .opacity))
                 }
             }
+    }
+
+    /// A white dot disappears on white, yellow and pastel swatches, so light swatches get a dark dot.
+    private var dotColor: Color {
+        if #available(iOS 17.0, macOS 14.0, watchOS 10.0, visionOS 1.0, *) {
+            let resolved = color.resolve(in: environment)
+            // Relative luminance, from the linear sRGB components.
+            let luminance = 0.2126 * resolved.linearRed
+                + 0.7152 * resolved.linearGreen
+                + 0.0722 * resolved.linearBlue
+            if luminance > 0.5 {
+                return .black.opacity(0.3)
+            }
+        }
+        return .white.opacity(0.6)
     }
 }
 
@@ -160,11 +174,15 @@ public struct ColorProviderCell: View {
 #if DEBUG
     /// Tap a cell to watch the selection animate.
     private struct ColorCellPreview: View {
-        @State private var selection: Color? = .green
+        @State var selection: Color?
 
         var body: some View {
             HStack {
-                ForEach([Color.blue, .green, .orange, .yellow, .white], id: \.self) { color in
+                ForEach(
+                    // The last color is the light yellow card background, #F9EB9F.
+                    [Color.blue, .green, .orange, .yellow, .white, Color(red: 0.976, green: 0.922, blue: 0.624)],
+                    id: \.self
+                ) { color in
                     ColorCell(selection: $selection, color: color, size: CGSize(width: 40, height: 40))
                 }
             }
@@ -172,6 +190,10 @@ public struct ColorProviderCell: View {
     }
 
     #Preview {
-        ColorCellPreview()
+        VStack(spacing: 16) {
+            ColorCellPreview(selection: .green)
+            ColorCellPreview(selection: .white)
+            ColorCellPreview(selection: Color(red: 0.976, green: 0.922, blue: 0.624))
+        }
     }
 #endif
